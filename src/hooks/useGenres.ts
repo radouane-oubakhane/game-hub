@@ -1,44 +1,10 @@
-import {useEffect, useState} from "react";
-import apiClient from "../services/api-client";
-import {CanceledError} from "axios";
-import {Game} from "./useGames";
+import useData from "./useData";
 
 interface Genre {
     id: number;
     name: string;
 }
 
-interface FetchGenresResponse {
-    count: number;
-    results: Game[];
-}
-
-function UseGenres() {
-    const [genres, setGenres] = useState([] as Genre[]);
-    const [error, setError] = useState('');
-    const [isLoading, setLoading] =  useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        const controller = new AbortController();
-        apiClient.get<FetchGenresResponse>('/genres', {signal: controller.signal})
-            .then(res => {
-                setGenres(res.data.results)
-                setLoading(false);
-            })
-            .catch(err => {
-                if (err instanceof CanceledError) return;
-                setError(err.message)
-                setLoading(false);
-            });
-
-        return () => {
-            controller.abort();
-        }
-    }, [])
-
-    return {genres, error, isLoading}
-
-}
+const UseGenres = () => useData<Genre>('/genres');
 
 export default UseGenres;
