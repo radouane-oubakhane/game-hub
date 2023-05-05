@@ -6,12 +6,12 @@ import React from "react";
 
 interface Props {
     onSelectGenre: (genre: Genre) => void;
-    selectedGenre: Genre | null;
+    selectedGenreId?: number;
 }
 
 
 
-function GenreList({onSelectGenre, selectedGenre}: Props) {
+function GenreList({onSelectGenre, selectedGenreId}: Props) {
     const { data: genres, error, isLoading} = useGenres();
     const skeletons = [1, 2, 3, 4, 5, 6, 7, 8,];
 
@@ -37,7 +37,7 @@ function GenreList({onSelectGenre, selectedGenre}: Props) {
                             <Button
                                 whiteSpace="normal"
                                 textAlign="left"
-                                fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
+                                fontWeight={genre.id === selectedGenreId ? 'bold' : 'normal'}
                                 variant="link"
                                 fontSize="lg"
                                 onClick={() => onSelectGenre(genre)}
