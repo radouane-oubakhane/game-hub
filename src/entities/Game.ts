@@ -1,5 +1,5 @@
-import {Platform} from "./platform";
-import {Genre} from "./genre";
+import {Platform} from "./Platform";
+import {Genre} from "./Genre";
 import {Publisher} from "./Publisher";
 
 export interface Game {
