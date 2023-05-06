@@ -22,5 +22,10 @@ export default class ApiClient<T> {
     }
     getAll = (config: AxiosRequestConfig) =>
         axiosInstance.get<FetchResponse<T>>(this.endpoint, config)
+            .then(res => res.data);
+
+    get = (id: number | string) =>
+        axiosInstance.get<T>(this.endpoint + '/' + id)
             .then(res => res.data)
+
 }
