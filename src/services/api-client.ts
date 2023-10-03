@@ -1,5 +1,6 @@
 import axios, {AxiosRequestConfig} from "axios"
 
+const apiKey = import.meta.env.VITE_RAWG_API_KEY;
 
 export interface FetchResponse<T> {
     count: number;
@@ -10,7 +11,7 @@ export interface FetchResponse<T> {
 const axiosInstance = axios.create({
     baseURL: 'https://api.rawg.io/api',
     params: {
-        key: '9a8cf794635b4d879f94cb7de4a1aef5'
+        key: apiKey
     }
 })
 
